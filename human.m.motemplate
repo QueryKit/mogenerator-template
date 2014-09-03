@@ -1,0 +1,10 @@
+#import "<$managedObjectClassName$>.h"
+
+@interface <$managedObjectClassName$> ()
+
+@end
+
+@implementation <$managedObjectClassName$>
+
+@end
+
