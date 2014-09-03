@@ -3,30 +3,6 @@
 
 #import "_<$managedObjectClassName$>.h"
 
-<$if noninheritedAttributes.@count > 0$>
-const struct <$managedObjectClassName$>Attributes <$managedObjectClassName$>Attributes = {<$foreach Attribute noninheritedAttributes do$>
-    .<$Attribute.name$> = @"<$Attribute.name$>",<$endforeach do$>
-};
-<$endif$>
-
-<$if noninheritedRelationships.@count > 0$>
-const struct <$managedObjectClassName$>Relationships <$managedObjectClassName$>Relationships = {<$foreach Relationship noninheritedRelationships do$>
-    .<$Relationship.name$> = @"<$Relationship.name$>",<$endforeach do$>
-};
-<$endif$>
-
-<$if noninheritedFetchedProperties.@count > 0$>
-const struct <$managedObjectClassName$>FetchedProperties <$managedObjectClassName$>FetchedProperties = {<$foreach FetchedProperty noninheritedFetchedProperties do$>
-    .<$FetchedProperty.name$> = @"<$FetchedProperty.name$>",<$endforeach do$>
-};
-<$endif$>
-
-<$if hasUserInfoKeys$>
-const struct <$managedObjectClassName$>UserInfo <$managedObjectClassName$>UserInfo = {<$foreach UserInfo userInfoKeyValues do$>
-    .<$UserInfo.key$> = @"<$UserInfo.value$>",<$endforeach do$>
-};
-<$endif$>
-
 @implementation <$managedObjectClassName$>ID
 @end
 
@@ -61,6 +37,22 @@ const struct <$managedObjectClassName$>UserInfo <$managedObjectClassName$>UserIn
 
     return keyPaths;
 }
+
+#pragma mark - Attributes
+
+<$foreach Attribute noninheritedAttributes do$>
++ (QKAttribute *)<$Attribute.name$> {
+    return [[QKAttribute alloc] initWithName:@"<$Attribute.name$>"];
+}
+<$endforeach do$>
+
+<$foreach Relationship noninheritedRelationships do$>
++ (QKAttribute *)<$Relationship.name$> {
+    return [[QKAttribute alloc] initWithName:@"<$Relationship.name$>"];
+}
+<$endforeach do$>
+
+#pragma mark -
 
 <$foreach Attribute noninheritedAttributes do$>
 <$if Attribute.hasDefinedAttributeType$>

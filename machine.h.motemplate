@@ -2,35 +2,12 @@
 // Make changes to <$managedObjectClassName$>.h instead.
 
 <$if TemplateVar.modules$>@import CoreData;<$else$>#import <CoreData/CoreData.h><$endif$>
+#import <QueryKit/QueryKit.h>
 <$if hasCustomSuperentity$><$if hasSuperentity$>#import "<$customSuperentity$>.h"
 <$else$><$if hasCustomBaseCaseImport$>#import <$baseClassImport$><$else$>#import "<$customSuperentity$>.h"<$endif$><$endif$><$endif$>
 
 <$if hasAdditionalHeaderFile$>
 #import "<$additionalHeaderFileName$>"
-<$endif$>
-
-<$if noninheritedAttributes.@count > 0$>
-extern const struct <$managedObjectClassName$>Attributes {<$foreach Attribute noninheritedAttributes do$>
-    <$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$Attribute.name$>;<$endforeach do$>
-} <$managedObjectClassName$>Attributes;
-<$endif$>
-
-<$if noninheritedRelationships.@count > 0$>
-extern const struct <$managedObjectClassName$>Relationships {<$foreach Relationship noninheritedRelationships do$>
-    <$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$Relationship.name$>;<$endforeach do$>
-} <$managedObjectClassName$>Relationships;
-<$endif$>
-
-<$if noninheritedFetchedProperties.@count > 0$>
-extern const struct <$managedObjectClassName$>FetchedProperties {<$foreach FetchedProperty noninheritedFetchedProperties do$>
-    <$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$FetchedProperty.name$>;<$endforeach do$>
-} <$managedObjectClassName$>FetchedProperties;
-<$endif$>
-
-<$if hasUserInfoKeys$>
-extern const struct <$managedObjectClassName$>UserInfo {<$foreach UserInfo userInfoKeyValues do$>
-    <$if TemplateVar.arc$>__unsafe_unretained<$endif$> NSString *<$UserInfo.key$>;<$endforeach do$>
-} <$managedObjectClassName$>UserInfo;
 <$endif$>
 
 <$foreach Relationship noninheritedRelationships do$>@class <$Relationship.destinationEntity.managedObjectClassName$>;
@@ -45,11 +22,26 @@ extern const struct <$managedObjectClassName$>UserInfo {<$foreach UserInfo userI
 @interface <$managedObjectClassName$>ID : <$if hasSuperentity$><$customSuperentity$>ID<$else$>NSManagedObjectID<$endif$> {}
 @end
 
-@interface _<$managedObjectClassName$> : <$customSuperentity$> {}
+@interface _<$managedObjectClassName$> : <$customSuperentity$>
+
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSString *)entityName;
 + (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 @property (nonatomic, readonly, strong) <$managedObjectClassName$>ID *objectID;
+
+#praga mark - Attributes
+
+<$foreach Attribute noninheritedAttributes do$>
+/// Returns an attribute for the property <$Attribute.name$>.
++ (QKAttribute *)<$Attribute.name$>;
+<$endforeach do$>
+
+<$foreach Relationship noninheritedRelationships do$>
+/// Returns an attribute for the relationship <$Relationship.name$>.
++ (QKAttribute *)<$Relationship.name$>;
+<$endforeach do$>
+
+#pragma mark -
 
 <$foreach Attribute noninheritedAttributes do$>
 <$if Attribute.hasDefinedAttributeType$>
