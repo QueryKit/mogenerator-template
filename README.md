@@ -1,6 +1,18 @@
 QueryKit Mogenerator Template
 =============================
 
+These templates are designed to add QueryKit attributes to your managed object
+subclasses.
+
+```objective-c
+@interface _Person : NSManagedObject
+
+/// Returns an attribute for the name property.
++ (QKAttribute *)name;
+
+@end
+```
+
 ### Installation:
 
 ```bash
