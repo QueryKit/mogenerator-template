@@ -8,18 +8,20 @@
 
 @implementation _<$managedObjectClassName$>
 
-+ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription insertNewObjectForEntityForName:@"<$name$>" inManagedObjectContext:moc_];
+#pragma mark - Helpers
+
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    NSParameterAssert(managedObjectContext);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"<$name$>" inManagedObjectContext:managedObjectContext];
 }
 
 + (NSString *)entityName {
     return @"<$name$>";
 }
 
-+ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)moc_ {
-    NSParameterAssert(moc_);
-    return [NSEntityDescription entityForName:@"<$name$>" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    NSParameterAssert(managedObjectContext);
+    return [NSEntityDescription entityForName:@"<$name$>" inManagedObjectContext:managedObjectContext];
 }
 
 - (<$managedObjectClassName$>ID *)objectID {
@@ -52,7 +54,7 @@
 }
 <$endforeach do$>
 
-#pragma mark -
+#pragma mark - Properties
 
 <$foreach Attribute noninheritedAttributes do$>
 <$if Attribute.hasDefinedAttributeType$>
