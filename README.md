@@ -1,6 +1,8 @@
 QueryKit Mogenerator Template
 =============================
 
+[![Build Status](http://img.shields.io/travis/QueryKit/mogenerator-template/master.svg?style=flat)](https://travis-ci.org/QueryKit/mogenerator-template)
+
 These templates are designed to add QueryKit attributes to your managed object
 subclasses.
 

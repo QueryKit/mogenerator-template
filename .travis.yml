@@ -1,0 +1,6 @@
+language: objective-c
+install:
+  - brew uninstall mogenerator || true
+  - brew install --HEAD mogenerator
+script: make tests
+
