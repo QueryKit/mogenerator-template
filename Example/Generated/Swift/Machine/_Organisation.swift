@@ -2,18 +2,30 @@
 // Make changes to Organisation.swift instead.
 
 import CoreData
-
-enum OrganisationAttributes: String {
-    case name = "name"
-}
-
-enum OrganisationRelationships: String {
-    case founder = "founder"
-    case members = "members"
-}
+import QueryKit
 
 @objc
 class _Organisation: NSManagedObject {
+
+    struct Attributes {
+
+        var name:Attribute<String> {
+            return Attribute<String>("name")
+        }
+
+        var founder:Attribute<Person?> {
+            return Attribute<Person?>("founder")
+        }
+
+        var members:Attribute<NSSet> {
+            return Attribute<NSSet>("members")
+        }
+
+    }
+
+    var attributes:Attributes {
+        return Attributes()
+    }
 
     // MARK: - Class methods
 

@@ -2,18 +2,7 @@
 // Make changes to <$managedObjectClassName$>.swift instead.
 
 import CoreData
-
-<$if noninheritedAttributes.@count > 0$>
-enum <$managedObjectClassName$>Attributes: String {<$foreach Attribute noninheritedAttributes do$>
-    case <$Attribute.name$> = "<$Attribute.name$>"<$endforeach do$>
-}
-<$endif$>
-
-<$if noninheritedRelationships.@count > 0$>
-enum <$managedObjectClassName$>Relationships: String {<$foreach Relationship noninheritedRelationships do$>
-    case <$Relationship.name$> = "<$Relationship.name$>"<$endforeach do$>
-}
-<$endif$>
+import QueryKit
 
 <$if noninheritedFetchedProperties.@count > 0$>
 enum <$managedObjectClassName$>FetchedProperties: String {<$foreach FetchedProperty noninheritedFetchedProperties do$>
@@ -30,8 +19,30 @@ enum <$managedObjectClassName$>UserInfo: String {<$foreach UserInfo userInfoKeyV
 @objc
 class _<$managedObjectClassName$>: <$customSuperentity$> {
 
+    struct Attributes {
+        <$if noninheritedAttributes.@count > 0$><$foreach Attribute noninheritedAttributes do$>
+        var <$Attribute.name$>:Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>> {
+            return Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>>("<$Attribute.name$>")
+        }<$endforeach do$><$endif$>
+
+        <$if noninheritedRelationships.@count > 0$>
+        <$foreach Relationship noninheritedRelationships do$>
+        <$if Relationship.isToMany$>
+        var <$Relationship.name$>:Attribute<<$Relationship.immutableCollectionClassName$>> {
+            return Attribute<<$Relationship.immutableCollectionClassName$>>("<$Relationship.name$>")
+        <$else$>
+        var <$Relationship.name$>:Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>> {
+            return Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>>("<$Relationship.name$>")
+        <$endif$>}<$endforeach do$>
+        <$endif$>
+    }
+
+    var attributes:Attributes {
+        return Attributes()
+    }
+
     // MARK: - Class methods
-    
+
     <$if hasCustomSuperentity$>override <$endif$>class func entityName () -> String {
         return "<$name$>"
     }

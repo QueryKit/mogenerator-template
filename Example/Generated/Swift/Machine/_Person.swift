@@ -2,19 +2,33 @@
 // Make changes to Person.swift instead.
 
 import CoreData
-
-enum PersonAttributes: String {
-    case birthday = "birthday"
-    case name = "name"
-}
-
-enum PersonRelationships: String {
-    case organisations = "organisations"
-    case ownedOrganisations = "ownedOrganisations"
-}
+import QueryKit
 
 @objc
 class _Person: NSManagedObject {
+
+    struct Attributes {
+
+        var birthday:Attribute<NSDate?> {
+            return Attribute<NSDate?>("birthday")
+        }
+        var name:Attribute<String> {
+            return Attribute<String>("name")
+        }
+
+        var organisations:Attribute<NSSet> {
+            return Attribute<NSSet>("organisations")
+        }
+
+        var ownedOrganisations:Attribute<NSSet> {
+            return Attribute<NSSet>("ownedOrganisations")
+        }
+
+    }
+
+    var attributes:Attributes {
+        return Attributes()
+    }
 
     // MARK: - Class methods
 
