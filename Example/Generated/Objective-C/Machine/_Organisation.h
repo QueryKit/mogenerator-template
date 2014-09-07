@@ -2,35 +2,41 @@
 // Make changes to Organisation.h instead.
 
 @import CoreData;
-
-extern const struct OrganisationAttributes {
-	__unsafe_unretained NSString *name;
-} OrganisationAttributes;
-
-extern const struct OrganisationRelationships {
-	__unsafe_unretained NSString *founder;
-	__unsafe_unretained NSString *members;
-} OrganisationRelationships;
+#import <QueryKit/QueryKit.h>
 
 @class Person;
 @class Person;
 
-@interface OrganisationID : NSManagedObjectID {}
+@interface OrganisationID : NSManagedObjectID
 @end
 
-@interface _Organisation : NSManagedObject {}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) OrganisationID* objectID;
+@interface _Organisation : NSManagedObject
+
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (NSString *)entityName;
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+@property (nonatomic, readonly, strong) OrganisationID *objectID;
+
+#praga mark - Attributes
+
+/// Returns an attribute for the property name.
++ (QKAttribute *)name;
+
+/// Returns an attribute for the relationship founder.
++ (QKAttribute *)founder;
+
+/// Returns an attribute for the relationship members.
++ (QKAttribute *)members;
+
+#pragma mark -
 
 @property (nonatomic, strong) NSString* name;
 
-//- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateName:(id*)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) Person *founder;
 
-//- (BOOL)validateFounder:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateFounder:(id *)value error:(NSError **)error_;
 
 @property (nonatomic, strong) NSSet *members;
 
@@ -39,10 +45,10 @@ extern const struct OrganisationRelationships {
 @end
 
 @interface _Organisation (MembersCoreDataGeneratedAccessors)
-- (void)addMembers:(NSSet*)value_;
-- (void)removeMembers:(NSSet*)value_;
-- (void)addMembersObject:(Person*)value_;
-- (void)removeMembersObject:(Person*)value_;
+- (void)addMembers:(NSSet *)value;
+- (void)removeMembers:(NSSet *)value;
+- (void)addMembersObject:(Person *)value;
+- (void)removeMembersObject:(Person *)value;
 
 @end
 
@@ -51,10 +57,11 @@ extern const struct OrganisationRelationships {
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
-- (Person*)primitiveFounder;
-- (void)setPrimitiveFounder:(Person*)value;
+- (Person *)primitiveFounder;
+- (void)setPrimitiveFounder:(Person *)value;
 
-- (NSMutableSet*)primitiveMembers;
-- (void)setPrimitiveMembers:(NSMutableSet*)value;
+- (NSMutableSet *)primitiveMembers;
+- (void)setPrimitiveMembers:(NSMutableSet *)value;
 
 @end
+

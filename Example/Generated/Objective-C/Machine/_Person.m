@@ -3,44 +3,56 @@
 
 #import "_Person.h"
 
-const struct PersonAttributes PersonAttributes = {
-	.birthday = @"birthday",
-	.name = @"name",
-};
-
-const struct PersonRelationships PersonRelationships = {
-	.organisations = @"organisations",
-	.ownedOrganisations = @"ownedOrganisations",
-};
-
 @implementation PersonID
 @end
 
 @implementation _Person
 
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:moc_];
+#pragma mark - Helpers
+
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    NSParameterAssert(managedObjectContext);
+    return [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:managedObjectContext];
 }
 
-+ (NSString*)entityName {
-	return @"Person";
++ (NSString *)entityName {
+    return @"Person";
 }
 
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_ {
-	NSParameterAssert(moc_);
-	return [NSEntityDescription entityForName:@"Person" inManagedObjectContext:moc_];
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
+    NSParameterAssert(managedObjectContext);
+    return [NSEntityDescription entityForName:@"Person" inManagedObjectContext:managedObjectContext];
 }
 
-- (PersonID*)objectID {
-	return (PersonID*)[super objectID];
+- (PersonID *)objectID {
+    return (PersonID *)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString*)key {
-	NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
++ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString *)key {
+    NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
-	return keyPaths;
+    return keyPaths;
 }
+
+#pragma mark - Attributes
+
++ (QKAttribute *)birthday {
+    return [[QKAttribute alloc] initWithName:@"birthday"];
+}
+
++ (QKAttribute *)name {
+    return [[QKAttribute alloc] initWithName:@"name"];
+}
+
++ (QKAttribute *)organisations {
+    return [[QKAttribute alloc] initWithName:@"organisations"];
+}
+
++ (QKAttribute *)ownedOrganisations {
+    return [[QKAttribute alloc] initWithName:@"ownedOrganisations"];
+}
+
+#pragma mark - Properties
 
 @dynamic birthday;
 
@@ -48,24 +60,24 @@ const struct PersonRelationships PersonRelationships = {
 
 @dynamic organisations;
 
-- (NSMutableSet*)organisationsSet {
-	[self willAccessValueForKey:@"organisations"];
+- (NSMutableSet *)organisationsSet {
+    [self willAccessValueForKey:@"organisations"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"organisations"];
+    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"organisations"];
 
-	[self didAccessValueForKey:@"organisations"];
-	return result;
+    [self didAccessValueForKey:@"organisations"];
+    return result;
 }
 
 @dynamic ownedOrganisations;
 
-- (NSMutableSet*)ownedOrganisationsSet {
-	[self willAccessValueForKey:@"ownedOrganisations"];
+- (NSMutableSet *)ownedOrganisationsSet {
+    [self willAccessValueForKey:@"ownedOrganisations"];
 
-	NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"ownedOrganisations"];
+    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"ownedOrganisations"];
 
-	[self didAccessValueForKey:@"ownedOrganisations"];
-	return result;
+    [self didAccessValueForKey:@"ownedOrganisations"];
+    return result;
 }
 
 @end

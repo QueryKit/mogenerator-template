@@ -1,6 +1,7 @@
 @objc(Person)
 class Person: _Person {
 
-	// Custom logic goes here.
+    // Custom logic goes here.
 
 }
+

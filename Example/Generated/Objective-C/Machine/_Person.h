@@ -2,36 +2,44 @@
 // Make changes to Person.h instead.
 
 @import CoreData;
-
-extern const struct PersonAttributes {
-	__unsafe_unretained NSString *birthday;
-	__unsafe_unretained NSString *name;
-} PersonAttributes;
-
-extern const struct PersonRelationships {
-	__unsafe_unretained NSString *organisations;
-	__unsafe_unretained NSString *ownedOrganisations;
-} PersonRelationships;
+#import <QueryKit/QueryKit.h>
 
 @class Organisation;
 @class Organisation;
 
-@interface PersonID : NSManagedObjectID {}
+@interface PersonID : NSManagedObjectID
 @end
 
-@interface _Person : NSManagedObject {}
-+ (id)insertInManagedObjectContext:(NSManagedObjectContext*)moc_;
-+ (NSString*)entityName;
-+ (NSEntityDescription*)entityInManagedObjectContext:(NSManagedObjectContext*)moc_;
-@property (nonatomic, readonly, strong) PersonID* objectID;
+@interface _Person : NSManagedObject
+
++ (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
++ (NSString *)entityName;
++ (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+@property (nonatomic, readonly, strong) PersonID *objectID;
+
+#praga mark - Attributes
+
+/// Returns an attribute for the property birthday.
++ (QKAttribute *)birthday;
+
+/// Returns an attribute for the property name.
++ (QKAttribute *)name;
+
+/// Returns an attribute for the relationship organisations.
++ (QKAttribute *)organisations;
+
+/// Returns an attribute for the relationship ownedOrganisations.
++ (QKAttribute *)ownedOrganisations;
+
+#pragma mark -
 
 @property (nonatomic, strong) NSDate* birthday;
 
-//- (BOOL)validateBirthday:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateBirthday:(id*)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) NSString* name;
 
-//- (BOOL)validateName:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateName:(id*)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) NSSet *organisations;
 
@@ -44,18 +52,18 @@ extern const struct PersonRelationships {
 @end
 
 @interface _Person (OrganisationsCoreDataGeneratedAccessors)
-- (void)addOrganisations:(NSSet*)value_;
-- (void)removeOrganisations:(NSSet*)value_;
-- (void)addOrganisationsObject:(Organisation*)value_;
-- (void)removeOrganisationsObject:(Organisation*)value_;
+- (void)addOrganisations:(NSSet *)value;
+- (void)removeOrganisations:(NSSet *)value;
+- (void)addOrganisationsObject:(Organisation *)value;
+- (void)removeOrganisationsObject:(Organisation *)value;
 
 @end
 
 @interface _Person (OwnedOrganisationsCoreDataGeneratedAccessors)
-- (void)addOwnedOrganisations:(NSSet*)value_;
-- (void)removeOwnedOrganisations:(NSSet*)value_;
-- (void)addOwnedOrganisationsObject:(Organisation*)value_;
-- (void)removeOwnedOrganisationsObject:(Organisation*)value_;
+- (void)addOwnedOrganisations:(NSSet *)value;
+- (void)removeOwnedOrganisations:(NSSet *)value;
+- (void)addOwnedOrganisationsObject:(Organisation *)value;
+- (void)removeOwnedOrganisationsObject:(Organisation *)value;
 
 @end
 
@@ -67,10 +75,11 @@ extern const struct PersonRelationships {
 - (NSString*)primitiveName;
 - (void)setPrimitiveName:(NSString*)value;
 
-- (NSMutableSet*)primitiveOrganisations;
-- (void)setPrimitiveOrganisations:(NSMutableSet*)value;
+- (NSMutableSet *)primitiveOrganisations;
+- (void)setPrimitiveOrganisations:(NSMutableSet *)value;
 
-- (NSMutableSet*)primitiveOwnedOrganisations;
-- (void)setPrimitiveOwnedOrganisations:(NSMutableSet*)value;
+- (NSMutableSet *)primitiveOwnedOrganisations;
+- (void)setPrimitiveOwnedOrganisations:(NSMutableSet *)value;
 
 @end
+

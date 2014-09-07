@@ -1,5 +1,6 @@
 #import "_Person.h"
 
-@interface Person : _Person {}
-// Custom logic goes here.
+@interface Person : _Person
+
 @end
+
