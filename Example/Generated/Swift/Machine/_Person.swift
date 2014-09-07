@@ -40,8 +40,8 @@ class _Person: NSManagedObject {
         return "Person"
     }
 
-    class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
-        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext);
+    class func entity(managedObjectContext: NSManagedObjectContext) -> NSEntityDescription! {
+        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext)
     }
 
     // MARK: - Life cycle methods
