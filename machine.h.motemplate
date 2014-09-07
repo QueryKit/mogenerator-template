@@ -29,7 +29,7 @@
 + (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 @property (nonatomic, readonly, strong) <$managedObjectClassName$>ID *objectID;
 
-#praga mark - Attributes
+#pragma mark - Attributes
 
 <$foreach Attribute noninheritedAttributes do$>
 /// Returns an attribute for the property <$Attribute.name$>.

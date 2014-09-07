@@ -17,7 +17,7 @@
 + (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 @property (nonatomic, readonly, strong) OrganisationID *objectID;
 
-#praga mark - Attributes
+#pragma mark - Attributes
 
 /// Returns an attribute for the property name.
 + (QKAttribute *)name;
