@@ -42,11 +42,9 @@
 //- (BOOL)validateName:(id*)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) NSSet *organisations;
-
 - (NSMutableSet*)organisationsSet;
 
 @property (nonatomic, strong) NSSet *ownedOrganisations;
-
 - (NSMutableSet*)ownedOrganisationsSet;
 
 @end

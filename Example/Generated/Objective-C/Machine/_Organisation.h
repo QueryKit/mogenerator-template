@@ -35,11 +35,9 @@
 //- (BOOL)validateName:(id*)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) Person *founder;
-
 //- (BOOL)validateFounder:(id *)value error:(NSError **)error_;
 
 @property (nonatomic, strong) NSSet *members;
-
 - (NSMutableSet*)membersSet;
 
 @end
