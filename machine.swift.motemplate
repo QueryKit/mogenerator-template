@@ -19,6 +19,10 @@ enum <$managedObjectClassName$>UserInfo: String {<$foreach UserInfo userInfoKeyV
 @objc
 class _<$managedObjectClassName$>: <$customSuperentity$> {
 
+    class func queryset(context:NSManagedObjectContext) -> QuerySet<<$managedObjectClassName$>> {
+        return QuerySet<<$managedObjectClassName$>>(context, entityName)
+    }
+
     struct Attributes {
         <$if noninheritedAttributes.@count > 0$><$foreach Attribute noninheritedAttributes do$>
         var <$Attribute.name$>:Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>> {
@@ -37,18 +41,18 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
         <$endif$>
     }
 
-    var attributes:Attributes {
+    class var attributes:Attributes {
         return Attributes()
     }
 
     // MARK: - Class methods
 
-    <$if hasCustomSuperentity$>override <$endif$>class func entityName () -> String {
+    <$if hasCustomSuperentity$>override <$endif$>class var entityName:String {
         return "<$name$>"
     }
 
     <$if hasCustomSuperentity$>override <$endif$>class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
-        return NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: managedObjectContext);
+        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext)
     }
 
     // MARK: - Life cycle methods
@@ -132,11 +136,11 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
                 NSLog("WARN fetch request <$FetchRequest.name$>: 0 or 1 objects expected, %lu found (substitutionVariables:%@, results:%@)",
                     results.count,
                     substitutionVariables,
-                    results);
+                    results)
             }
         }
 
-        return result;
+        return result
     }
 <$else$>
     class func fetch<$FetchRequest.name.initialCapitalString$>(managedObjectContext: NSManagedObjectContext!<$foreach Binding FetchRequest.bindings do2$>, <$Binding.name$>: <$Binding.type$><$endforeach do2$>) -> [AnyObject] {

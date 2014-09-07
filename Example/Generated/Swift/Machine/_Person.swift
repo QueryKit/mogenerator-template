@@ -7,6 +7,10 @@ import QueryKit
 @objc
 class _Person: NSManagedObject {
 
+    class func queryset(context:NSManagedObjectContext) -> QuerySet<Person> {
+        return QuerySet<Person>(context, entityName)
+    }
+
     struct Attributes {
 
         var birthday:Attribute<NSDate?> {
@@ -26,18 +30,18 @@ class _Person: NSManagedObject {
 
     }
 
-    var attributes:Attributes {
+    class var attributes:Attributes {
         return Attributes()
     }
 
     // MARK: - Class methods
 
-    class func entityName () -> String {
+    class var entityName:String {
         return "Person"
     }
 
     class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
-        return NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: managedObjectContext);
+        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext);
     }
 
     // MARK: - Life cycle methods
