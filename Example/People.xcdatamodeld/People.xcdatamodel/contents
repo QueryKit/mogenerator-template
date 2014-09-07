@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5064" systemVersion="14A329f" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Organisation" representedClassName="Organisation" syncable="YES">
+        <attribute name="name" attributeType="String" indexed="YES" syncable="YES"/>
+        <relationship name="founder" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Person" inverseName="ownedOrganisations" inverseEntity="Person" syncable="YES"/>
+        <relationship name="members" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Person" inverseName="organisations" inverseEntity="Person" syncable="YES"/>
+    </entity>
+    <entity name="Person" representedClassName="Person">
+        <attribute name="birthday" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="name" attributeType="String" indexed="YES">
+            <userInfo/>
+        </attribute>
+        <relationship name="organisations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Organisation" inverseName="members" inverseEntity="Organisation" syncable="YES"/>
+        <relationship name="ownedOrganisations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Organisation" inverseName="founder" inverseEntity="Organisation" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <elements>
+        <element name="Organisation" positionX="261" positionY="207" width="128" height="88"/>
+        <element name="Person" positionX="261" positionY="189" width="128" height="103"/>
+    </elements>
+</model>
