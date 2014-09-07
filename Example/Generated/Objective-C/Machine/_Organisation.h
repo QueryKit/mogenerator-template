@@ -50,16 +50,3 @@
 
 @end
 
-@interface _Organisation (CoreDataGeneratedPrimitiveAccessors)
-
-- (NSString*)primitiveName;
-- (void)setPrimitiveName:(NSString*)value;
-
-- (Person *)primitiveFounder;
-- (void)setPrimitiveFounder:(Person *)value;
-
-- (NSMutableSet *)primitiveMembers;
-- (void)setPrimitiveMembers:(NSMutableSet *)value;
-
-@end
-

@@ -65,19 +65,3 @@
 
 @end
 
-@interface _Person (CoreDataGeneratedPrimitiveAccessors)
-
-- (NSDate*)primitiveBirthday;
-- (void)setPrimitiveBirthday:(NSDate*)value;
-
-- (NSString*)primitiveName;
-- (void)setPrimitiveName:(NSString*)value;
-
-- (NSMutableSet *)primitiveOrganisations;
-- (void)setPrimitiveOrganisations:(NSMutableSet *)value;
-
-- (NSMutableSet *)primitiveOwnedOrganisations;
-- (void)setPrimitiveOwnedOrganisations:(NSMutableSet *)value;
-
-@end
-

@@ -73,14 +73,6 @@
 }
 <$endif$>
 
-- (<$Attribute.scalarAttributeType$>)primitive<$Attribute.name.initialCapitalString$>Value {
-    NSNumber *result = [self primitive<$Attribute.name.initialCapitalString$>];
-    return [result <$Attribute.scalarAccessorMethodName$>];
-}
-
-- (void)setPrimitive<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_ {
-    [self setPrimitive<$Attribute.name.initialCapitalString$>:<$if TemplateVar.literals$>@(value_)<$else$>[NSNumber <$Attribute.scalarFactoryMethodName$>value_]<$endif$>];
-}
 <$endif$>
 <$endif$>
 <$endforeach do$>

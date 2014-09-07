@@ -114,25 +114,3 @@
 <$endif$>
 <$endforeach do$>
 
-@interface _<$managedObjectClassName$> (CoreDataGeneratedPrimitiveAccessors)
-<$foreach Attribute noninheritedAttributesSansType do$>
-<$if Attribute.hasDefinedAttributeType$>
-- (<$Attribute.objectAttributeType$>)primitive<$Attribute.name.initialCapitalString$>;
-- (void)setPrimitive<$Attribute.name.initialCapitalString$>:(<$Attribute.objectAttributeType$>)value;
-<$if Attribute.hasScalarAttributeType$>
-- (<$Attribute.scalarAttributeType$>)primitive<$Attribute.name.initialCapitalString$>Value;
-- (void)setPrimitive<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_;
-<$endif$>
-<$endif$>
-<$endforeach do$>
-<$foreach Relationship noninheritedRelationships do$>
-<$if Relationship.isToMany$>
-- (<$Relationship.mutableCollectionClassName$> *)primitive<$Relationship.name.initialCapitalString$>;
-- (void)setPrimitive<$Relationship.name.initialCapitalString$>:(<$Relationship.mutableCollectionClassName$> *)value;
-<$else$>
-- (<$Relationship.destinationEntity.managedObjectClassName$> *)primitive<$Relationship.name.initialCapitalString$>;
-- (void)setPrimitive<$Relationship.name.initialCapitalString$>:(<$Relationship.destinationEntity.managedObjectClassName$> *)value;
-<$endif$>
-<$endforeach do$>
-@end
-
