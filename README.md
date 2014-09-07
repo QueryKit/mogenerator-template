@@ -18,6 +18,7 @@ subclasses.
 ### Installation:
 
 ```bash
+$ brew install --HEAD mogenerator
 $ git clone https://github.com/QueryKit/mogenerator-template ~/.querykit-mogenerator-template
 ```
 
