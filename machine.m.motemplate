@@ -58,18 +58,16 @@
 
 <$foreach Attribute noninheritedAttributes do$>
 <$if Attribute.hasDefinedAttributeType$>
-
 @dynamic <$Attribute.name$>;
 
 <$if Attribute.hasScalarAttributeType$>
-
 - (<$Attribute.scalarAttributeType$>)<$Attribute.name$>Value {
     return [self.<$Attribute.name$> <$Attribute.scalarAccessorMethodName$>];
 }
 
 <$if ! Attribute.isReadonly$>
-- (void)set<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_ {
-    [self set<$Attribute.name.initialCapitalString$>:<$if TemplateVar.literals$>@(value_)<$else$>[NSNumber <$Attribute.scalarFactoryMethodName$>value_]<$endif$>];
+- (void)set<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value {
+    self.<$Attribute.name$> = @(value);
 }
 <$endif$>
 
