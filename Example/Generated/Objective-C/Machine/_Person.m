@@ -3,10 +3,31 @@
 
 #import "_Person.h"
 
+#import "_Organisation.h"
+
+#import "_Organisation.h"
+
 @implementation PersonID
 @end
 
 @implementation PersonAttribute
+
+- (QKAttribute *)birthday {
+    return [[QKAttribute alloc] initWithAttributes:self, [_Person birthday], nil];
+}
+
+- (QKAttribute *)name {
+    return [[QKAttribute alloc] initWithAttributes:self, [_Person name], nil];
+}
+
+- (OrganisationAttribute *)organisations {
+    return [[OrganisationAttribute alloc] initWithAttributes:self, [_Person organisations], nil];
+}
+
+- (OrganisationAttribute *)ownedOrganisations {
+    return [[OrganisationAttribute alloc] initWithAttributes:self, [_Person ownedOrganisations], nil];
+}
+
 @end
 
 @implementation _Person
