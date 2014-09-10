@@ -7,12 +7,31 @@ These templates are designed to add QueryKit attributes to your managed object
 subclasses.
 
 ```objective-c
+@interface _Organisation : NSManagedObject
+
+/// Returns an attribute for the name property.
++ (QKAttribute *)name;
+
+/// Returns an attribute for the relationship members.
+- (PersonAttribute *)members;
+
+@end
+
 @interface _Person : NSManagedObject
 
 /// Returns an attribute for the name property.
 + (QKAttribute *)name;
 
+/// Returns an attribute for the relationship organisation.
+- (OrganisationAttribute *)organisation;
+
 @end
+```
+
+You can use these attributes to perform queries:
+
+```objective-c
+NSPredicate *predicate = [[[Person organisation] name] equals:@"Cocode"];
 ```
 
 ### Installation:
