@@ -41,6 +41,10 @@ $ brew install --HEAD mogenerator
 $ git clone https://github.com/QueryKit/mogenerator-template ~/.querykit-mogenerator-template
 ```
 
+If you would like to pin to a specific version of the template, I would
+suggest that instead you use a git submodules within your project to
+add mogenerator-template pinned to a specific commit.
+
 ### Usage:
 
 To use the QueryKit template for mogenerator, pass in the template path
