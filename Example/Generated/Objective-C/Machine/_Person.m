@@ -6,6 +6,9 @@
 @implementation PersonID
 @end
 
+@implementation PersonAttribute
+@end
+
 @implementation _Person
 
 #pragma mark - Helpers

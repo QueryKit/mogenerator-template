@@ -6,6 +6,9 @@
 @implementation OrganisationID
 @end
 
+@implementation OrganisationAttribute
+@end
+
 @implementation _Organisation
 
 #pragma mark - Helpers

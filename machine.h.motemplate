@@ -11,6 +11,7 @@
 <$endif$>
 
 <$foreach Relationship noninheritedRelationships do$>@class <$Relationship.destinationEntity.managedObjectClassName$>;
+@class <$Relationship.destinationEntity.managedObjectClassName$>Attribute;
 <$endforeach do$>
 <$foreach Attribute noninheritedAttributes do$>
 <$if Attribute.hasTransformableAttributeType$>
@@ -20,6 +21,20 @@
 <$else$>@class <$Attribute.objectAttributeClassName$>;<$endif$><$endif$>
 <$endforeach do$>
 @interface <$managedObjectClassName$>ID : <$if hasSuperentity$><$customSuperentity$>ID<$else$>NSManagedObjectID<$endif$>
+@end
+
+@interface <$managedObjectClassName$>Attribute : QKAttribute
+
+<$foreach Attribute noninheritedAttributes do$>
+/// Returns an attribute for the property <$Attribute.name$>.
+- (QKAttribute *)<$Attribute.name$>;
+<$endforeach do$>
+
+<$foreach Relationship noninheritedRelationships do$>
+/// Returns an attribute for the relationship <$Relationship.name$>.
+- (<$Relationship.destinationEntity.managedObjectClassName$>Attribute *)<$Relationship.name$>;
+<$endforeach do$>
+
 @end
 
 @interface _<$managedObjectClassName$> : <$customSuperentity$>
@@ -38,7 +53,7 @@
 
 <$foreach Relationship noninheritedRelationships do$>
 /// Returns an attribute for the relationship <$Relationship.name$>.
-+ (QKAttribute *)<$Relationship.name$>;
++ (<$Relationship.destinationEntity.managedObjectClassName$>Attribute *)<$Relationship.name$>;
 <$endforeach do$>
 
 #pragma mark -

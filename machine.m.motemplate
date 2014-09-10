@@ -6,6 +6,9 @@
 @implementation <$managedObjectClassName$>ID
 @end
 
+@implementation <$managedObjectClassName$>Attribute
+@end
+
 @implementation _<$managedObjectClassName$>
 
 #pragma mark - Helpers

@@ -5,9 +5,27 @@
 #import <QueryKit/QueryKit.h>
 
 @class Organisation;
+@class OrganisationAttribute;
 @class Organisation;
+@class OrganisationAttribute;
 
 @interface PersonID : NSManagedObjectID
+@end
+
+@interface PersonAttribute : QKAttribute
+
+/// Returns an attribute for the property birthday.
+- (QKAttribute *)birthday;
+
+/// Returns an attribute for the property name.
+- (QKAttribute *)name;
+
+/// Returns an attribute for the relationship organisations.
+- (OrganisationAttribute *)organisations;
+
+/// Returns an attribute for the relationship ownedOrganisations.
+- (OrganisationAttribute *)ownedOrganisations;
+
 @end
 
 @interface _Person : NSManagedObject
@@ -26,10 +44,10 @@
 + (QKAttribute *)name;
 
 /// Returns an attribute for the relationship organisations.
-+ (QKAttribute *)organisations;
++ (OrganisationAttribute *)organisations;
 
 /// Returns an attribute for the relationship ownedOrganisations.
-+ (QKAttribute *)ownedOrganisations;
++ (OrganisationAttribute *)ownedOrganisations;
 
 #pragma mark -
 
