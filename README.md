@@ -13,7 +13,7 @@ subclasses.
 + (QKAttribute *)name;
 
 /// Returns an attribute for the relationship members.
-- (PersonAttribute *)members;
++ (PersonAttribute *)members;
 
 @end
 
@@ -23,7 +23,7 @@ subclasses.
 + (QKAttribute *)name;
 
 /// Returns an attribute for the relationship organisation.
-- (OrganisationAttribute *)organisation;
++ (OrganisationAttribute *)organisation;
 
 @end
 ```
