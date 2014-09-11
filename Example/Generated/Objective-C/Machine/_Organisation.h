@@ -27,6 +27,8 @@
 
 @interface _Organisation : NSManagedObject
 
++ (QKQuerySet *)querySetWithManagedObjectContext:(NSManagedObjectContext *)context;
+
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
 + (NSString *)entityName;
 + (NSEntityDescription *)entityInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;

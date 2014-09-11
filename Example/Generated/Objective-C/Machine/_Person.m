@@ -34,6 +34,10 @@
 
 #pragma mark - Helpers
 
++ (QKQuerySet *)querySetWithManagedObjectContext:(NSManagedObjectContext *)context {
+    return [[QKQuerySet alloc] initWithManagedObjectContext:context entityDescription:[self entityInManagedObjectContext:context]];
+}
+
 + (instancetype)insertInManagedObjectContext:(NSManagedObjectContext *)managedObjectContext {
     NSParameterAssert(managedObjectContext);
     return [NSEntityDescription insertNewObjectForEntityForName:@"Person" inManagedObjectContext:managedObjectContext];
