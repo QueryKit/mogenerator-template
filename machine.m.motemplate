@@ -1,10 +1,8 @@
 // DO NOT EDIT. This file is machine-generated and constantly overwritten.
 // Make changes to <$managedObjectClassName$>.m instead.
 
-#import "_<$managedObjectClassName$>.h"
-<$foreach Relationship noninheritedRelationships do$>
-#import "_<$Relationship.destinationEntity.managedObjectClassName$>.h"
-<$endforeach do$>
+#import "_<$managedObjectClassName$>.h"<$foreach Relationship noninheritedRelationships do$>
+#import "_<$Relationship.destinationEntity.managedObjectClassName$>.h"<$endforeach do$>
 
 @implementation <$managedObjectClassName$>ID
 @end
