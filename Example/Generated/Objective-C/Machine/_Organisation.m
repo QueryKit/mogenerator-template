@@ -52,7 +52,7 @@
     return (OrganisationID *)[super objectID];
 }
 
-+ (NSSet*)keyPathsForValuesAffectingValueForKey:(NSString *)key {
++ (NSSet *)keyPathsForValuesAffectingValueForKey:(NSString *)key {
     NSSet *keyPaths = [super keyPathsForValuesAffectingValueForKey:key];
 
     return keyPaths;
@@ -83,7 +83,7 @@
 - (NSMutableSet *)membersSet {
     [self willAccessValueForKey:@"members"];
 
-    NSMutableSet *result = (NSMutableSet*)[self mutableSetValueForKey:@"members"];
+    NSMutableSet *result = (NSMutableSet *)[self mutableSetValueForKey:@"members"];
 
     [self didAccessValueForKey:@"members"];
     return result;

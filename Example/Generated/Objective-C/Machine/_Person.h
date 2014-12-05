@@ -55,17 +55,17 @@
 
 @property (nonatomic, strong) NSDate* birthday;
 
-//- (BOOL)validateBirthday:(id*)value_ error:(NSError **)error_;
+//- (BOOL)validateBirthday:(id *)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) NSString* name;
 
-//- (BOOL)validateName:(id*)value_ error:(NSError **)error_;
+//- (BOOL)validateName:(id *)value_ error:(NSError **)error_;
 
 @property (nonatomic, strong) NSSet *organisations;
-- (NSMutableSet*)organisationsSet;
+- (NSMutableSet *)organisationsSet;
 
 @property (nonatomic, strong) NSSet *ownedOrganisations;
-- (NSMutableSet*)ownedOrganisationsSet;
+- (NSMutableSet *)ownedOrganisationsSet;
 
 @end
 

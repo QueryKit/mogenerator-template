@@ -3,9 +3,7 @@
 
 <$if TemplateVar.modules$>@import CoreData;<$else$>#import <CoreData/CoreData.h><$endif$>
 #import <QueryKit/QueryKit.h>
-<$if hasCustomSuperentity$><$if hasSuperentity$>#import "<$customSuperentity$>.h"
-<$else$><$if hasCustomBaseCaseImport$>#import <$baseClassImport$><$else$>#import "<$customSuperentity$>.h"<$endif$><$endif$><$endif$>
-
+<$if hasCustomSuperentity$><$if hasSuperentity$>#import "<$customSuperentity$>.h"<$else$><$if hasCustomBaseCaseImport$>#import <$baseClassImport$><$else$>#import "<$customSuperentity$>.h"<$endif$><$endif$><$endif$>
 <$if hasAdditionalHeaderFile$>
 #import "<$additionalHeaderFileName$>"
 <$endif$>
@@ -77,13 +75,13 @@
 - (void)set<$Attribute.name.initialCapitalString$>Value:(<$Attribute.scalarAttributeType$>)value_;
 <$endif$>
 <$endif$>
-//- (BOOL)validate<$Attribute.name.initialCapitalString$>:(id*)value_ error:(NSError **)error_;
+//- (BOOL)validate<$Attribute.name.initialCapitalString$>:(id *)value_ error:(NSError **)error_;
 <$endif$>
 <$endforeach do$>
 <$foreach Relationship noninheritedRelationships do$>
 <$if Relationship.isToMany$>
 @property (nonatomic, strong) <$Relationship.immutableCollectionClassName$> *<$Relationship.name$>;
-- (<$Relationship.mutableCollectionClassName$>*)<$Relationship.name$>Set;
+- (<$Relationship.mutableCollectionClassName$> *)<$Relationship.name$>Set;
 <$else$>
 @property (nonatomic, strong) <$Relationship.destinationEntity.managedObjectClassName$> *<$Relationship.name$>;
 //- (BOOL)validate<$Relationship.name.initialCapitalString$>:(id *)value error:(NSError **)error_;
@@ -92,7 +90,7 @@
 <$foreach FetchRequest prettyFetchRequests do$>
 <$if FetchRequest.singleResult$>
 + (id)fetch<$FetchRequest.name.initialCapitalString$>:(NSManagedObjectContext *)moc_ <$foreach Binding FetchRequest.bindings do2$><$Binding.name$>:(<$Binding.type$>)<$Binding.name$>_ <$endforeach do2$>;
-+ (id)fetch<$FetchRequest.name.initialCapitalString$>:(NSManagedObjectContext *)moc_ <$foreach Binding FetchRequest.bindings do2$><$Binding.name$>:(<$Binding.type$>)<$Binding.name$>_ <$endforeach do2$>error:(NSError**)error_;
++ (id)fetch<$FetchRequest.name.initialCapitalString$>:(NSManagedObjectContext *)moc_ <$foreach Binding FetchRequest.bindings do2$><$Binding.name$>:(<$Binding.type$>)<$Binding.name$>_ <$endforeach do2$>error:(NSError **)error_;
 <$else$>
 + (NSArray*)fetch<$FetchRequest.name.initialCapitalString$>:(NSManagedObjectContext *)moc_ <$foreach Binding FetchRequest.bindings do2$><$Binding.name$>:(<$Binding.type$>)<$Binding.name$>_ <$endforeach do2$>;
 + (NSArray*)fetch<$FetchRequest.name.initialCapitalString$>:(NSManagedObjectContext *)moc_ <$foreach Binding FetchRequest.bindings do2$><$Binding.name$>:(<$Binding.type$>)<$Binding.name$>_ <$endforeach do2$>error:(NSError **)error_;
@@ -105,7 +103,7 @@
 #if TARGET_OS_IPHONE
 <$foreach Relationship noninheritedRelationships do$>
 <$if Relationship.isToMany$>
-- (NSFetchedResultsController*)new<$Relationship.name.initialCapitalString$>FetchedResultsControllerWithSortDescriptors:(NSArray *)sortDescriptors;
+- (NSFetchedResultsController *)new<$Relationship.name.initialCapitalString$>FetchedResultsControllerWithSortDescriptors:(NSArray *)sortDescriptors;
 <$endif$>
 <$endforeach do$>
 #endif
@@ -124,7 +122,7 @@
 - (void)removeObjectFrom<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)idx;
 - (void)insert<$Relationship.name.initialCapitalString$>:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
 - (void)remove<$Relationship.name.initialCapitalString$>AtIndexes:(NSIndexSet *)indexes;
-- (void)replaceObjectIn<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)idx withObject:(<$Relationship.destinationEntity.managedObjectClassName$>*)value;
+- (void)replaceObjectIn<$Relationship.name.initialCapitalString$>AtIndex:(NSUInteger)idx withObject:(<$Relationship.destinationEntity.managedObjectClassName$> *)value;
 - (void)replace<$Relationship.name.initialCapitalString$>AtIndexes:(NSIndexSet *)indexes with<$Relationship.name.initialCapitalString$>:(NSArray *)values;
 <$endif$>
 @end
