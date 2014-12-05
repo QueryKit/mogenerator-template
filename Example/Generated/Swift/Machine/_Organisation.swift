@@ -85,13 +85,13 @@ extension _Organisation {
         self.members = mutable.copy() as NSSet
     }
 
-    func addMembersObject(value: Person!) {
+    func addMembersObject(value: Person) {
         let mutable = self.members.mutableCopy() as NSMutableSet
         mutable.addObject(value)
         self.members = mutable.copy() as NSSet
     }
 
-    func removeMembersObject(value: Person!) {
+    func removeMembersObject(value: Person) {
         let mutable = self.members.mutableCopy() as NSMutableSet
         mutable.removeObject(value)
         self.members = mutable.copy() as NSSet

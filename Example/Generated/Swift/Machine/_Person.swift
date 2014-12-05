@@ -91,13 +91,13 @@ extension _Person {
         self.organisations = mutable.copy() as NSSet
     }
 
-    func addOrganisationsObject(value: Organisation!) {
+    func addOrganisationsObject(value: Organisation) {
         let mutable = self.organisations.mutableCopy() as NSMutableSet
         mutable.addObject(value)
         self.organisations = mutable.copy() as NSSet
     }
 
-    func removeOrganisationsObject(value: Organisation!) {
+    func removeOrganisationsObject(value: Organisation) {
         let mutable = self.organisations.mutableCopy() as NSMutableSet
         mutable.removeObject(value)
         self.organisations = mutable.copy() as NSSet
@@ -119,13 +119,13 @@ extension _Person {
         self.ownedOrganisations = mutable.copy() as NSSet
     }
 
-    func addOwnedOrganisationsObject(value: Organisation!) {
+    func addOwnedOrganisationsObject(value: Organisation) {
         let mutable = self.ownedOrganisations.mutableCopy() as NSMutableSet
         mutable.addObject(value)
         self.ownedOrganisations = mutable.copy() as NSSet
     }
 
-    func removeOwnedOrganisationsObject(value: Organisation!) {
+    func removeOwnedOrganisationsObject(value: Organisation) {
         let mutable = self.ownedOrganisations.mutableCopy() as NSMutableSet
         mutable.removeObject(value)
         self.ownedOrganisations = mutable.copy() as NSSet
