@@ -25,25 +25,35 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
 
     struct Attributes {
         <$if noninheritedAttributes.@count > 0$><$foreach Attribute noninheritedAttributes do$>
-        var <$Attribute.name$>:Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>> {
-            return Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>>("<$Attribute.name$>")
-        }<$endforeach do$><$endif$>
+        static var <$Attribute.name$>:Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>> = Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>>("<$Attribute.name$>")
+        <$endforeach do$><$endif$>
 
         <$if noninheritedRelationships.@count > 0$>
         <$foreach Relationship noninheritedRelationships do$>
         <$if Relationship.isToMany$>
-        var <$Relationship.name$>:Attribute<<$Relationship.immutableCollectionClassName$>> {
-            return Attribute<<$Relationship.immutableCollectionClassName$>>("<$Relationship.name$>")
+        static var <$Relationship.name$>:Attribute<<$Relationship.immutableCollectionClassName$>> = Attribute<<$Relationship.immutableCollectionClassName$>>("<$Relationship.name$>")
         <$else$>
-        var <$Relationship.name$>:Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>> {
-            return Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>>("<$Relationship.name$>")
-        <$endif$>}<$endforeach do$>
+        static var <$Relationship.name$>:Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>> = Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>>("<$Relationship.name$>")
+        <$endif$><$endforeach do$>
         <$endif$>
     }
 
-    class var attributes:Attributes {
-        return Attributes()
-    }
+    <$if noninheritedAttributes.@count > 0$><$foreach Attribute noninheritedAttributes do$>
+    class var <$Attribute.name$>:Attribute<<$Attribute.objectAttributeType$><$if Attribute.isOptional$>?<$endif$>> {
+        return Attributes.<$Attribute.name$>
+    }<$endforeach do$><$endif$>
+
+    <$if noninheritedRelationships.@count > 0$>
+    <$foreach Relationship noninheritedRelationships do$>
+    <$if Relationship.isToMany$>
+    class var <$Relationship.name$>:Attribute<<$Relationship.immutableCollectionClassName$>> {
+        return Attributes.<$Relationship.name$>
+    <$else$>
+    class var <$Relationship.name$>:Attribute<<$Relationship.destinationEntity.managedObjectClassName$><$if Relationship.isOptional$>?<$endif$>> {
+        return Attributes.<$Relationship.name$>
+    <$endif$>}<$endforeach do$>
+    <$endif$>
+
 
     // MARK: - Class methods
 
@@ -72,10 +82,10 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
 <$if Attribute.hasScalarAttributeType$>
 <$if Attribute.isReadonly$>
     @NSManaged
-    let <$Attribute.name$>: NSNumber?
+    let <$Attribute.name$>: NSNumber<$if Attribute.isOptional$>?<$endif$>
 <$else$>
     @NSManaged
-    var <$Attribute.name$>: NSNumber?
+    var <$Attribute.name$>: NSNumber<$if Attribute.isOptional$>?<$endif$>
 <$endif$>
 <$else$>
 <$if Attribute.isReadonly$>
@@ -177,28 +187,63 @@ class _<$managedObjectClassName$>: <$customSuperentity$> {
 <$foreach Relationship noninheritedRelationships do$><$if Relationship.isToMany$>
 extension _<$managedObjectClassName$> {
 
-    func add<$Relationship.name.initialCapitalString$>(objects: <$Relationship.immutableCollectionClassName$>) {
-        let mutable = self.<$Relationship.name$>.mutableCopy() as NSMutable<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
-        mutable.union<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set(objects)
-        self.<$Relationship.name$> = mutable.copy() as NS<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
+<$if Relationship.jr_isOrdered$>
+    func add<$Relationship.name.initialCapitalString$>(objects: NSOrderedSet) {
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableOrderedSet
+        mutable.unionOrderedSet(objects)
+        self.<$Relationship.name$> = mutable.copy() as! NSOrderedSet
     }
 
-    func remove<$Relationship.name.initialCapitalString$>(objects: <$Relationship.immutableCollectionClassName$>) {
-        let mutable = self.<$Relationship.name$>.mutableCopy() as NSMutable<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
-        mutable.minus<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set(objects)
-        self.<$Relationship.name$> = mutable.copy() as NS<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
+    func add<$Relationship.name.initialCapitalString$>(objects: NSOrderedSet) {
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableOrderedSet
+        mutable.minusOrderedSet(objects)
+        self.<$Relationship.name$> = mutable.copy() as! NSOrderedSet
     }
 
     func add<$Relationship.name.initialCapitalString$>Object(value: <$Relationship.destinationEntity.managedObjectClassName$>) {
-        let mutable = self.<$Relationship.name$>.mutableCopy() as NSMutable<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableOrderedSet
         mutable.addObject(value)
-        self.<$Relationship.name$> = mutable.copy() as NS<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
+        self.<$Relationship.name$> = mutable.copy() as! NSOrderedSet
     }
 
     func remove<$Relationship.name.initialCapitalString$>Object(value: <$Relationship.destinationEntity.managedObjectClassName$>) {
-        let mutable = self.<$Relationship.name$>.mutableCopy() as NSMutable<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableOrderedSet
         mutable.removeObject(value)
-        self.<$Relationship.name$> = mutable.copy() as NS<$if Relationship.jr_isOrdered$>Ordered<$endif$>Set
+        self.<$Relationship.name$> = mutable.copy() as! NSOrderedSet
+    }
+<$else$>
+    func add<$Relationship.name.initialCapitalString$>(objects: Set<<$Relationship.destinationEntity.managedObjectClassName$>>) {
+        var mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableSet
+        mutable.unionSet(objects)
+        self.<$Relationship.name$> = mutable.copy() as! Set<<$Relationship.destinationEntity.managedObjectClassName$>>
+    }
+
+    func remove<$Relationship.name.initialCapitalString$>(objects: Set<<$Relationship.destinationEntity.managedObjectClassName$>>) {
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableSet
+        mutable.minusSet(objects)
+        self.<$Relationship.name$> = mutable.copy() as! Set<<$Relationship.destinationEntity.managedObjectClassName$>>
+    }
+
+    func add<$Relationship.name.initialCapitalString$>Object(value: <$Relationship.destinationEntity.managedObjectClassName$>) {
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableSet
+        mutable.addObject(value)
+        self.<$Relationship.name$> = mutable.copy() as! Set<<$Relationship.destinationEntity.managedObjectClassName$>>
+    }
+
+    func remove<$Relationship.name.initialCapitalString$>Object(value: <$Relationship.destinationEntity.managedObjectClassName$>) {
+        let mutable = self.<$Relationship.name$>.mutableCopy() as! NSMutableSet
+        mutable.removeObject(value)
+        self.<$Relationship.name$> = mutable.copy() as! Set<<$Relationship.destinationEntity.managedObjectClassName$>>
+    }
+<$endif$>
+
+    func insert<$Relationship.name.initialCapitalString$>Object() -> <$Relationship.destinationEntity.managedObjectClassName$> {
+        precondition(managedObjectContext != nil)
+        let entity = NSEntityDescription.entityForName(<$Relationship.destinationEntity.managedObjectClassName$>.entityName, inManagedObjectContext: managedObjectContext!)!
+        let object = <$Relationship.destinationEntity.managedObjectClassName$>(entity: entity, insertIntoManagedObjectContext: managedObjectContext!)
+
+        add<$Relationship.name.initialCapitalString$>Object(object)
+        return object
     }
 
 }
