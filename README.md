@@ -6,6 +6,8 @@ QueryKit Mogenerator Template
 These templates are designed to add QueryKit attributes to your managed object
 subclasses.
 
+**NOTE**: *[querykit-cli](https://github.com/QueryKit/querykit-cli) is preferred over mogenerator-template when you are using Swift 2.0.*
+
 ```objective-c
 @interface _Organisation : NSManagedObject
 
